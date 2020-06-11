@@ -1,0 +1,44 @@
+
+#环境参数
+g0 = 9.807 #重力加速度
+start_altitude = 1100 #开始规划的高度（海平面）；如果太小，则来不及减速；太大则无法在tf时间内落地
+
+#求解条件
+tf = 20 #预估落地所需时间/秒（必须足够大否则无解，但不宜过大，否则精度较低）
+straight_fac = 5 #值越大，末段越直
+direct = False #直接求解（比较慢）
+
+#目标参数
+target_lat = -0.0967791065 #纬度/度
+target_lon = -74.617390900 #经度/度
+target_height = 0.2 + 113.88067357 #海平面算起
+
+#限制参数
+max_tilt = 25  #度
+throttle_limit = [0.1, 0.8] #规划时节流阀限制
+throttle_limit_ctrl = [0.05, 1.0] #实际执行时节流阀限制
+G_max = 10 #最大加速度 g
+V_max = 150 #最大速度 m/s
+y_gs = 10 #最小下降角度（圆锥形限制区域的母线与地面夹角）
+
+#姿态控制所用PID参数
+ctrl_x_rot.kp = 5
+ctrl_x_rot.kd = 2.5
+ctrl_y_avel_kp = 2 #y为滚转
+ctrl_z_rot.kp = 5
+ctrl_z_rot.kd = 2.5
+
+#滑行中调整控制速度和位置所用PID参数
+k_x = 0.5 #p
+k_v = 0.8 #d
+
+#最终降落段
+#进入目标附近圆柱区域时会切换控制模式
+final_height = 200 #触发区域高度
+final_radius = 20 #触发区域半径
+final_throttle = 0.8
+final_kp = 1
+
+
+#debug
+debug_lines = True
