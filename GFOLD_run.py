@@ -122,20 +122,34 @@ class solver:
 
 if __name__ == '__main__':
     from EvilPlotting import *
+#    test_vessel = {
+#        'Isp' : 203.94,
+#        'G_max' : 3,
+#        'V_max' : 90,
+#        'y_gs' : np.radians(30),
+#        'p_cs' : np.radians(45),
+#        'm_wet' : (2)*1e3 + (0.3)*1e3,
+#        'T_max' : 24000,
+#        'throt' : [0.2,0.8],
+#        #'x0' : np.array([2400, 450, -330,  -10,  -40,   10]),
+#        'x0' : np.array([1400, 450, -330,  -20,  40,   40]),
+#        'g' : np.array([-3.71,0,0]),
+#        'tf' : 80,
+#        'straight_fac' : 1,
+#    }
     test_vessel = {
-        'Isp' : 203.94,
-        'G_max' : 3,
-        'V_max' : 90,
-        'y_gs' : np.radians(30),
-        'p_cs' : np.radians(45),
-        'm_wet' : (2)*1e3 + (0.3)*1e3,
-        'T_max' : 24000,
-        'throt' : [0.2,0.8],
-        #'x0' : np.array([2400, 450, -330,  -10,  -40,   10]),
-        'x0' : np.array([1400, 450, -330,  -20,  40,   40]),
-        'g' : np.array([-3.71,0,0]),
-        'tf' : 80,
-        'straight_fac' : 1,
+        'Isp': 256.83880615234375, 
+        'G_max': 100, 
+        'V_max': 150, 
+        'y_gs': 0.7853981633974483, 
+        'p_cs': 1.335176877775662, 
+        'm_wet': 5904.27880859375, 
+        'T_max': 172557.234375, 
+        'throt': [0.1, 0.8], 
+        'x0': np.array([  230.6261789 ,  -259.6486983 ,   107.25770515, -1424.00991313, -153.36160242,    25.85659298]), 
+        'g': np.array([-9.807,  0.   ,  0.   ]), 
+        'tf': 30, 
+        'straight_fac': 5
     }
     if 'direct' in sys.argv[1:]:
         print('solving test vessel directly')

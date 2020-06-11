@@ -168,13 +168,16 @@ throttle_limit_ctrl = params['throttle_limit_ctrl']
 #生成求解器所需的输入
 def vessel_profile1(vessel_d):
     est_time = 0.5
+    #print('vel ' + str(vessel_d['vel']))
+    #print('acceleration ' + str(vessel_d['acceleration']))
+    #print('error ' + str(vessel_d['error']))
     vel_est = vessel_d['vel'] + vessel_d['acceleration'] * est_time
     pos_est = vessel_d['error'] + vessel_d['vel'] * est_time + 0.5 * vessel_d['acceleration'] * est_time * est_time
     return {
         'Isp' : vessel_d['specific_impulse'],
         'G_max' : params['G_max'],
         'V_max' : params['V_max'],
-        'y_gs' : np.radians(params['y_gs']),
+        'y_gs' : params['y_gs'] * deg2rad,
         'p_cs' : max_tilt * 0.85,
         'm_wet' : vessel_d['mass'],
         'T_max' : vessel_d['max_thrust'],
@@ -221,7 +224,7 @@ ref_body = body.reference_frame
 ref_target_temp = space_center.ReferenceFrame.create_relative(ref_body, position=target_body_pos)
 ref_target = space_center.ReferenceFrame.create_hybrid(ref_target_temp, rotation=ref_surface, velocity=ref_target_temp)
 
-prev_vel = v(vessel.velocity(ref_surface))
+prev_vel = v(vessel.velocity(ref_target))
 N = 80
 gfold_path = None
 n_i = -1
@@ -326,6 +329,7 @@ def solve_gfold(v_data):
         #print('tf: ' + str(tf))
         print('gfold')
         nav_mode = 'gfold'
+        print(v_data)
 
 while True:
     time.sleep(delta_time)
@@ -400,7 +404,7 @@ while True:
         if n_i > 0:
             vessel.control.throttle = target_throttle
         
-        if (N - n_i) * tf / N < 6:
+        if (N - n_i) * tf / N < 10:
             vessel.control.gear = True
         if npl.norm(error[1:3]) < params['final_radius'] and npl.norm(error[0]) < params['final_height']:
             vessel.control.gear = True
