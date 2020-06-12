@@ -4,7 +4,7 @@
 
 可调参数在params.txt中
 
-如果要用生成的代码（效率更高）则需要先跑一遍build.bat，如果要直接求解（效率低）请把params.txt中direct改成True
+如果要用cvxpy_codegen生成的c代码（效率更高）则需要先跑一遍build.bat，如果要直接cvxpy求解（效率低）请把params.txt中direct改成True
 
 直接运行python ./GFOLD_run.py或python ./GFOLD_run.py direct可以用实例数据测试求解器是否工作正常
 
