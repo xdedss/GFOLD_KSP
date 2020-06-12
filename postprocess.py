@@ -1,3 +1,8 @@
+# -*- coding: utf-8 -*-
+
+#自动处理生成代码中的错误
+
+
 import os
 import sys
 
@@ -41,8 +46,8 @@ def process(folder, pkgname):
     ['codegen.h', 'vars_struct{\n}', 'vars_struct{int wtf;}'], # empty struct
     ['codegen.h', 'params_struct{}', 'params_struct{int wtf;}'], # empty struct
     ['ecos/src/ecos.c', '_set_output_format(_TWO_DIGIT_EXPONENT)', '0'], # old api
-    ['ecos/include/glblopts.h', '#define NAN', '//#define NAN_'],
-    ['ecos/include/glblopts.h', '#define INFINITY', '//#define INFINITY_'],
+    ['ecos/include/glblopts.h', '#define NAN', '//#define _NAN'],
+    ['ecos/include/glblopts.h', '#define INFINITY', '//#define _INFINITY'],
     ['param.c', '[0] = {};', '[1] = {0};'], # zero len array
     ]
     

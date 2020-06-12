@@ -1,4 +1,6 @@
+# -*- coding: utf-8 -*-
 # GFOLD_static_p3p4
+
 
 min_=min
 from cvxpy import *
@@ -29,6 +31,7 @@ import GFOLD_params as params
             1) landing point must be equal or better than that found by p1
 
 '''
+
 
 def GFOLD_gen(N, pmark, fname): # PRIMARY GFOLD SOLVER
 
@@ -99,8 +102,9 @@ def GFOLD_gen(N, pmark, fname): # PRIMARY GFOLD SOLVER
             
             mu_1 = r1*(z0_term_inv[0,n])
             mu_2 = r2*(z0_term_inv[0,n])
-
-            # https://www.desmos.com/calculator/wtcfgnepe1
+            
+            #更正一处原项目与论文不符之处
+            # 示意图：https://www.desmos.com/calculator/wtcfgnepe1
             con += [s[0,n] >= mu_1 * (1 - (z[0,n] - z0) + (z[0,n] - z0)**2 *0.5)] # lower thrust bound
             con += [s[0,n] <= mu_2 * (1 - (z[0,n] - z0))] # upper thrust bound
 
@@ -114,6 +118,9 @@ def GFOLD_gen(N, pmark, fname): # PRIMARY GFOLD SOLVER
 #        for i in range(N):
 #            expression += norm(x[4:6,i])*(1) # - rf[0:3,0]
 #        expression *= straight_fac
+        #增加一些正则项，希望i越大，r越接近于原点
+        #这样导致p3生成的轨迹会在尽量短的时间内到达目标并一直停留在目标
+        #这样可以求出到达目标需要的最短时间
         for i in range(N):
             expression += norm(x[0:3,i])*(i/N) # - rf[0:3,0]
         objective=Minimize(expression)
@@ -128,6 +135,7 @@ def GFOLD_gen(N, pmark, fname): # PRIMARY GFOLD SOLVER
         print('-----------------------------')
         #objective=Maximize(z[0,N-1])
         expression = 0
+        #增加一些正则项，希望在接近目标时优先消除水平速度
         for i in range(N):
             expression += norm(x[4:6,i])*(i/N) # - rf[0:3,0]
         expression *= straight_fac
