@@ -81,6 +81,8 @@ def GFOLD_direct(N, pmark, packed_data): # PRIMARY GFOLD SOLVER
 
         # Thrust pointing constraint
         con += [ u[0,n] >= p_cs_cos*s[0,n]  ]
+        
+        
 
         if n > 0:
             
