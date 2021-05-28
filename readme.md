@@ -14,7 +14,7 @@ GFOLD_run.py - 封装了solver类，可以调用上述两个方法求解
 
 python 3.x （推荐3.6）
 
-cvxpy 0.4.11（不兼容1.x版本）
+cvxpy 0.4.11（不兼容1.x版本，且需要依赖scipy==1.2.1）
 
 [cvxpy_codegen](https://github.com/moehle/cvxpy_codegen) （注：在python3.x中可能需要把setup.py中"python >= 2.7"一行删去才能正常安装）
 
